@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A7014302246C6C4009EC77F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A70142F2246C6C4009EC77F /* CameraViewController.swift */; };
+		5A7014322246E580009EC77F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7014312246E580009EC77F /* PostCell.swift */; };
 		5A7F88552244433000FD0B3B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F88542244433000FD0B3B /* AppDelegate.swift */; };
 		5A7F885A2244433000FD0B3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F88582244433000FD0B3B /* Main.storyboard */; };
 		5A7F885C2244433200FD0B3B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F885B2244433200FD0B3B /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		44419BEF682C97C02A952456 /* Pods_ParstagramTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ParstagramTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533D3B6108DBAADB67B7E4A7 /* Pods_Parstagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Parstagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A70142F2246C6C4009EC77F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		5A7014312246E580009EC77F /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		5A7F88512244433000FD0B3B /* Parstagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Parstagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A7F88542244433000FD0B3B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A7F88592244433000FD0B3B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				5AF380D322445BCB008D1C7E /* LoginViewController.swift */,
 				5AF380D522445BD6008D1C7E /* FeedViewController.swift */,
 				5A70142F2246C6C4009EC77F /* CameraViewController.swift */,
+				5A7014312246E580009EC77F /* PostCell.swift */,
 			);
 			path = Parstagram;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				5A7014302246C6C4009EC77F /* CameraViewController.swift in Sources */,
 				5AF380D622445BD6008D1C7E /* FeedViewController.swift in Sources */,
 				5A7F88552244433000FD0B3B /* AppDelegate.swift in Sources */,
+				5A7014322246E580009EC77F /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
