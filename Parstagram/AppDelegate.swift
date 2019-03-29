@@ -26,6 +26,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = "https://polar-dusk-43219.herokuapp.com/Parse"
             })
         )
+        
+        // Check if parseuser is logged in
+        if (PFUser.current() != nil){
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            let feedNavigationController = main.instantiateViewController(withIdentifier: "FeedNavigationController");
+            // Change default root view controller
+            window?.rootViewController = feedNavigationController;
+        }
+        
+        
         return true
     }
 

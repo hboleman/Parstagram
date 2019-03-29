@@ -18,6 +18,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Create posts
     var posts = [PFObject]();
 
+    
+    // VIEW DID BLANK
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -42,6 +44,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    // TABLE VIEW RELATED
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count;
     }
@@ -54,7 +58,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         let user = post["author"] as! PFUser;
         cell.usernameLable.text = user.username;
         
-        cell.captionLable.text = post["caption"] as! String;
+        cell.captionLable.text = post["caption"] as? String;
         
         let imageFile = post["image"] as! PFFileObject;
         let urlString = imageFile.url!;
@@ -64,15 +68,4 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         return cell;
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
