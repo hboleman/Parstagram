@@ -17,14 +17,15 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Outlets
     @IBOutlet weak var tableView: UITableView!
     
-    // Create posts
+    // Post Related Objects
     var posts = [PFObject]();
+    var selectedPost: PFObject!;
     
     // For Message Input Bar
     let commentBar = MessageInputBar();
     var showCommentBar = false;
     
-    // VIEW DID BLANK
+    // VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         // For keyboard setup
@@ -32,19 +33,20 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         commentBar.sendButton.title = "Post";
         commentBar.delegate = self;
         
+        // For table view
         tableView.delegate = self;
         tableView.dataSource = self;
         
+        // Allows the keyboard to be dismissed interactivly
         tableView.keyboardDismissMode = .interactive
         
         // For hiding keyboard
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillBeHidden(note:)), name: UIResponder.keyboardWillHideNotification , object: nil)
     }
-    
+    // VIEW DID APPEAR
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
-        
         
         let query = PFQuery(className:"Posts");
         query.includeKeys(["author", "comments", "comments.author"]);
@@ -76,7 +78,22 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Keyboard Post Button
     func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
         // Create comment
+        let comment = PFObject(className: "Comments");
+                comment["text"] = text
+                comment["post"] = selectedPost
+                comment["author"] = PFUser.current()!
         
+                selectedPost.add(comment, forKey: "comments")
+        
+                selectedPost.saveInBackground { (success, error) in
+                    if success {
+                        print("Comment saved!")
+                    }
+                    else {
+                        print("ERROR: comment could not be saved!: \(String(describing: error))")
+                    }
+                }
+        tableView.reloadData();
         // Clear and dismiss keyboard
         hideKeyboard();
     }
@@ -157,7 +174,7 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
         let comments = (post["comments"] as? [PFObject]) ?? [];
         
         // To figure out if you are in the add comment cell
@@ -165,22 +182,8 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
             showCommentBar = true;
             becomeFirstResponder()
             commentBar.inputTextView.becomeFirstResponder()
+            // Remembers which post for later
+            selectedPost = post;
         }
-        
-//        comment["text"] = "This is a random comment"
-//        comment["post"] = post
-//        comment["author"] = PFUser.current()!
-//
-//        post.add(comment, forKey: "comments")
-//
-//        post.saveInBackground { (success, error) in
-//            if success {
-//                print("Comment saved!")
-//            }
-//            else {
-//                print("ERROR: comment could not be saved!: \(error)")
-//            }
-//        }
     }
-    
 }

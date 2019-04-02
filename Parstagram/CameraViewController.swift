@@ -11,18 +11,18 @@ import AlamofireImage
 import Parse
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    //-------------------- Class Setup --------------------//
+    
     // Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var commentField: UITextField!
     
-    
-    
+    // VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    //-------------------- Button Actions --------------------//
     
     @IBAction func onSubmitButton(_ sender: Any) {
         let post = PFObject(className: "Posts");
@@ -68,12 +68,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+    //-------------------- Extra Functions --------------------//
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.editedImage] as! UIImage;
         
         // Resize Image
         let size = CGSize(width: 300, height: 300);
-        let scaledImage = image.af_imageScaled(to: size);
+        let scaledImage = image.af_imageAspectScaled(toFill: size);
         
         // Put scaled image inside view window
         imageView.image = scaledImage;
@@ -81,15 +83,4 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Dismiss Camera View
         dismiss(animated: true, completion: nil);
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
